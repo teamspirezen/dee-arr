@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@500;600&display=swap');
+
+:root{
+  --bg-primary:#f4f5f7;
+  --bg-secondary:#ffffff;
+  --ink-dark:#1f2933;
+  --ink-muted:#6b7280;
+  --line-soft:#e5e7eb;
+  --accent-gold:#c9a24d;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Inter,sans-serif;
+  background:var(--bg-primary);
+  color:var(--ink-dark);
+  line-height:1.7;
+}
+
+.container{
+  max-width:1080px;
+  width:90%;
+  margin:auto;
+}
+
+/* INTRO */
+.intro{
+  padding:120px 0;
+  background:#fff;
+}
+
+.intro h1{
+  font-family:'Playfair Display',serif;
+  font-size:46px;
+}
+
+.intro p{
+  max-width:700px;
+  margin-top:15px;
+  color:var(--ink-muted);
+}
+
+/* SECTIONS */
+.section{
+  padding:90px 0;
+}
+
+.muted{
+  background:#fff;
+}
+
+/* LAYOUTS */
+.two-col{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:50px;
+}
+
+.highlight-card{
+  border-left:4px solid var(--accent-gold);
+  padding:30px;
+  background:var(--bg-secondary);
+}
+
+.highlight-card ul{
+  margin-top:15px;
+  padding-left:18px;
+  color:var(--ink-muted);
+}
+
+/* METRICS */
+.metrics{
+  padding:80px 0;
+}
+
+.metrics-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:30px;
+}
+
+.metric-card{
+  background:#fff;
+  padding:30px;
+  text-align:center;
+  border:1px solid var(--line-soft);
+}
+
+.metric-card strong{
+  font-size:42px;
+  color:var(--accent-gold);
+}
+
+/* VALUES */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+
+.value-card{
+  background:#fff;
+  padding:30px;
+  border:1px solid var(--line-soft);
+}
+
+.value-card h3{
+  margin-bottom:10px;
+}
+
+/* PERFORMANCE */
+.performance{
+  max-width:600px;
+}
+
+.performance label{
+  font-size:14px;
+  color:var(--ink-muted);
+}
+
+.bar{
+  height:6px;
+  background:var(--line-soft);
+  margin:6px 0 20px;
+}
+
+.bar div{
+  height:100%;
+  background:var(--accent-gold);
+  animation:grow 2s ease;
+}
+
+@keyframes grow{
+  from{width:0}
+}
+
+/* WHY CHOOSE */
+.choose-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:15px;
+  margin-top:30px;
+  color:var(--ink-muted);
+}
+
+/* FOOTER */
+.footer{
+  background:#fff;
+  border-top:1px solid var(--line-soft);
+  padding:40px 0;
+  text-align:center;
+  font-size:14px;
+}
+
+/* ANIMATIONS */
+.fade{animation:fade 1s}
+.slide{animation:slide 1s}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+}
+
+@keyframes slide{
+  from{opacity:0;transform:translateY(30px)}
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .two-col{
+    grid-template-columns:1fr;
+  }
+}
