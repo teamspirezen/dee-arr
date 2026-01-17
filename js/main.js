@@ -33,10 +33,33 @@ function initHeader() {
 
   // Mobile Menu
   const ham = document.querySelector('.hamburger');
-  // Simple toggle for now, in a real app would be a full overlay
-  ham.addEventListener('click', () => {
-    // toggle menu logic here if needed
-    alert('Mobile menu toggle - Implemented in full version');
+  const menuOverlay = document.querySelector('.mobile-menu-overlay');
+  const closeBtn = document.querySelector('.close-menu');
+  const menuLinks = document.querySelectorAll('.mobile-nav a');
+
+  function openMenu() {
+    menuOverlay.classList.add('active');
+    ham.classList.add('active'); // Animate hamburger to X
+    document.body.style.overflow = 'hidden'; // Lock scroll
+  }
+
+  function closeMenu() {
+    menuOverlay.classList.remove('active');
+    ham.classList.remove('active'); // Reset hamburger
+    document.body.style.overflow = ''; // Unlock scroll
+  }
+
+  ham.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+
+  // Close when clicking outside content (on the overlay backdrop)
+  menuOverlay.addEventListener('click', (e) => {
+    if (e.target === menuOverlay) closeMenu();
+  });
+
+  // Close when clicking a link
+  menuLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
 }
 
@@ -61,13 +84,13 @@ function initScrollAnimations() {
     el.classList.add('reveal-text'); // reused class for fade-up
     observer.observe(el);
   });
-  
+
   // Parallax Hero
   const heroBg = document.querySelector('.hero-bg');
   window.addEventListener('scroll', () => {
     const scroll = window.scrollY;
-    if(scroll < window.innerHeight) {
-        heroBg.style.transform = `scale(1.1) translateY(${scroll * 0.5}px)`;
+    if (scroll < window.innerHeight) {
+      heroBg.style.transform = `scale(1.1) translateY(${scroll * 0.5}px)`;
     }
   });
 }
