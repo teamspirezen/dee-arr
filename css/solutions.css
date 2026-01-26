@@ -1,167 +1,365 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@500;600&display=swap');
+/* --- CINEMATIC SOLUTIONS PAGE --- */
 
-:root{
-  --bg-primary:#f4f5f7;
-  --bg-secondary:#ffffff;
-  --ink-dark:#1f2933;
-  --ink-muted:#6b7280;
-  --line-soft:#e5e7eb;
-  --accent-gold:#c9a24d;
+/* Clean Reset / Base overrides */
+body {
+  overflow-x: hidden;
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-  font-family:Inter,sans-serif;
-  background:var(--bg-primary);
-  color:var(--ink-dark);
-  line-height:1.7;
+/* HERO SECTION */
+.cinematic-hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  background-image: url('../assets/images/solutions_hero_new.png');
+  background-size: cover;
+  background-position: center;
 }
 
-.container{
-  max-width:1080px;
-  width:90%;
-  margin:auto;
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  filter: brightness(0.6);
 }
 
-/* HEADER */
-.header{
-  background:#fff;
-  border-bottom:1px solid var(--line-soft);
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11, 11, 11, 0.3), var(--bg-dark));
+  z-index: 1;
 }
 
-.nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  height:80px;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding-top: 60px;
+  /* Offset for header */
 }
 
-nav a{
-  margin-left:24px;
-  text-decoration:none;
-  color:var(--ink-dark);
-  font-size:14px;
+.hero-title {
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
-.active{color:var(--accent-gold)}
-.cta{color:var(--accent-gold)}
-
-/* INTRO */
-.page-intro{
-  padding:120px 0 80px;
-  background:#fff;
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #ccc;
+  max-width: 600px;
+  margin-bottom: 40px;
+  font-weight: 300;
 }
 
-.page-intro h1{
-  font-family:'Playfair Display',serif;
-  font-size:48px;
+.reveal-text {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.page-intro p{
-  max-width:620px;
-  margin-top:15px;
-  color:var(--ink-muted);
+.delay-1 {
+  animation-delay: 0.2s;
 }
 
-/* SECTIONS */
-.section{
-  padding:90px 0;
+.delay-2 {
+  animation-delay: 0.4s;
 }
 
-.muted{
-  background:#fff;
+.delay-3 {
+  animation-delay: 0.6s;
 }
 
-.solution-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:60px;
+.delay-4 {
+  animation-delay: 0.8s;
 }
 
-.solution-grid h2{
-  font-size:32px;
-  margin-bottom:10px;
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.solution-grid ul{
-  margin-top:15px;
-  padding-left:18px;
-  color:var(--ink-muted);
+/* Hover Glow Button */
+.glow-hover {
+  position: relative;
+  box-shadow: 0 0 20px rgba(245, 196, 0, 0);
+  /* using accent color logic roughly */
+  transition: 0.4s ease;
 }
 
-/* PROGRESS */
-.progress-card{
-  border-left:3px solid var(--accent-gold);
-  padding-left:24px;
+.glow-hover:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+  transform: scale(1.05);
 }
 
-.progress-card span{
-  font-size:13px;
-  display:block;
-  margin-top:16px;
+/* STICKY SERVICES SECTION */
+.services-wrapper {
+  padding: 120px 0;
+  background: var(--bg-dark);
 }
 
-.bar{
-  background:var(--line-soft);
-  height:6px;
-  margin:6px 0;
+.sticky-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  align-items: start;
 }
 
-.bar div{
-  height:100%;
-  background:var(--accent-gold);
-  animation:grow 2s ease;
+.sticky-side {
+  position: sticky;
+  top: 120px;
 }
 
-@keyframes grow{
-  from{width:0}
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
 }
 
-/* CTA */
-.cta-section{
-  background:var(--ink-dark);
-  color:#fff;
-  padding:90px 0;
-  text-align:center;
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 400px;
 }
 
-.cta-section p{
-  color:#d1d5db;
-  margin:12px 0 22px;
+.scroll-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-.primary-btn{
-  background:var(--accent-gold);
-  color:#fff;
-  padding:14px 36px;
-  text-decoration:none;
+.service-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 12px;
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Slower, smoother */
 }
 
-/* FOOTER */
-.footer{
-  background:#fff;
-  border-top:1px solid var(--line-soft);
-  padding:40px 0;
-  text-align:center;
-  font-size:14px;
+.service-card:hover {
+  transform: translateX(10px) translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* ANIMATIONS */
-.fade{animation:fade 1.2s ease}
-.slide-up{animation:slide 1s ease}
-
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px)}
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
-@keyframes slide{
-  from{opacity:0;transform:translateY(30px)}
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.service-card p {
+  color: var(--text-muted);
+}
+
+/* VISUAL BREAK (PARALLAX) */
+.visual-break {
+  height: 60vh;
+  background: url('https://images.unsplash.com/photo-1487958449943-2429e8be8625') center/cover no-repeat fixed;
+  /* Fixed = CSS Parallax */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visual-break::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.center-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.center-text h2 {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+/* STICKY STACK (FEATURED PROJECTS) */
+.stack-wrapper {
+  padding: 120px 0 200px;
+  /* Extra padding at bottom for scroll room */
+  background: #000;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.stack-area {
+  position: relative;
+  /* Not sticky itself, holds content */
+  width: 100%;
+}
+
+.stack-card {
+  position: sticky;
+  top: 150px;
+  /* Sticky trigger point */
+  margin-bottom: 20px;
+  /* Gap for static flow if JS fails, usually controlled by height */
+  transform-origin: center top;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  perspective: 1000px;
+}
+
+/* Stacking offset handled by top value in CSS or we can use the --i variable for calculated top */
+.stack-card:nth-child(1) {
+  top: 120px;
+}
+
+.stack-card:nth-child(2) {
+  top: 150px;
+}
+
+.stack-card:nth-child(3) {
+  top: 180px;
+}
+
+.stack-card:nth-child(4) {
+  top: 210px;
+}
+
+.stack-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  min-height: 500px;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: 0.4s;
+}
+
+.stack-content:hover {
+  border-color: var(--accent);
+  box-shadow: 0 -10px 50px rgba(255, 215, 0, 0.1);
+}
+
+.stack-text h3 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.stack-cat {
+  color: var(--accent);
+  display: block;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.stack-img {
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stack-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.stack-card:hover .stack-img img {
+  transform: scale(1.05);
+}
+
+/* Alternate Layout for visual variety */
+.stack-card:nth-child(even) .stack-content {
+  grid-template-columns: 1fr 1fr;
+  /* Keep standard grid but we might swap order in media query if needed, or stick to consistency */
 }
 
 /* RESPONSIVE */
-@media(max-width:900px){
-  .solution-grid{
-    grid-template-columns:1fr;
+@media (max-width: 900px) {
+  .sticky-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sticky-side {
+    position: relative;
+    top: 0;
+    margin-bottom: 40px;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  /* Stack Mobile */
+  .stack-content {
+    grid-template-columns: 1fr;
+    padding: 30px;
+    gap: 30px;
+  }
+
+  .stack-img {
+    height: 250px;
+    order: -1;
+    /* Image first on mobile */
+  }
+
+  .stack-text h3 {
+    font-size: 1.8rem;
+  }
+
+  /* Adjust sticky tops for mobile */
+  .stack-card:nth-child(1) {
+    top: 100px;
+  }
+
+  .stack-card:nth-child(2) {
+    top: 120px;
+  }
+
+  .stack-card:nth-child(3) {
+    top: 140px;
+  }
+
+  .stack-card:nth-child(4) {
+    top: 160px;
+  }
+
+  .center-text h2 {
+    font-size: 2rem;
   }
 }

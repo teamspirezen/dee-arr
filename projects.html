@@ -2,163 +2,165 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Dee Arr Constructions</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/projects.css">
-  <link rel="stylesheet" href="css/global.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Completed Projects</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/projects.css" />
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
-  <header class="site-header">
-    <div class="container nav">
-      <div class="logo">DEE ARR</div>
-      <nav>
+  <!-- HEADER -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">DEE ARR <span class="text-accent">.</span></a>
+
+      <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="solutions.html">Solutions</a>
         <a href="process.html">Process</a>
         <a href="projects.html">Projects</a>
         <a href="about.html">About</a>
-        <a href="contact.html" class="nav-cta">Contact</a>
+        <a href="contact.html">Contact</a>
       </nav>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </header>
 
+  <!-- MOBILE MENU OVERLAY -->
+  <div class="mobile-menu-overlay">
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-header">
+        <div class="mobile-logo">DEE ARR <span class="text-accent">.</span></div>
+        <button class="close-menu">&times;</button>
+      </div>
+      <nav class="mobile-nav">
+        <a href="index.html">Home</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="process.html">Process</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <a href="contact.html" class="btn btn-primary" style="width:100%; text-align:center">Get a Quote</a>
+      </div>
+    </div>
+  </div>
 
-  <!-- INTRO -->
-  <section class="intro fade">
+  <section class="projects-hero">
     <div class="container">
-      <h1>Our Projects</h1>
+      <h1>Our <span>Projects</span></h1>
       <p>
-        A curated portfolio of residential, commercial and interior projects
-        delivered with precision, quality and accountability.
+        A portfolio of successfully delivered construction projects
+        showcasing our commitment to quality and excellence.
       </p>
     </div>
   </section>
 
-  <!-- PROJECT CATEGORIES -->
-  <section class="section slide">
-    <div class="container category-grid">
-
-      <!-- CARD 1 -->
-      <div class="project-card">
-        <img src="assets/images/p1.jpg" alt="Residential Project">
-        <div class="card-content">
-          <h3>Residential Developments</h3>
-          <p>
-            Independent houses, villas and apartment projects built
-            with long-term durability and design integrity.
-          </p>
-
-          <div class="meta">
-            <span>✔ 120+ Units</span>
-            <span>✔ On-Time Delivery</span>
-          </div>
-
-          <div class="progress">
-            <label>Completion Rate</label>
-            <div class="bar">
-              <div style="width:100%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARD 2 -->
-      <div class="project-card">
-        <img src="assets/images/p2.jpg" alt="Commercial Project">
-        <div class="card-content">
-          <h3>Commercial Projects</h3>
-          <p>
-            Office buildings, retail spaces and mixed-use developments
-            delivered to strict quality and compliance standards.
-          </p>
-
-          <div class="meta">
-            <span>✔ Corporate Clients</span>
-            <span>✔ Safety Compliant</span>
-          </div>
-
-          <div class="progress">
-            <label>Client Satisfaction</label>
-            <div class="bar">
-              <div style="width:95%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARD 3 -->
-      <div class="project-card">
-        <img src="assets/images/p3.jpg" alt="Interior Project">
-        <div class="card-content">
-          <h3>Interior Fit-Outs</h3>
-          <p>
-            Premium interior execution for residential and commercial
-            spaces with attention to detail and finish quality.
-          </p>
-
-          <div class="meta">
-            <span>✔ High-End Finishes</span>
-            <span>✔ Detail-Oriented</span>
-          </div>
-
-          <div class="progress">
-            <label>Repeat Clients</label>
-            <div class="bar">
-              <div style="width:90%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PROJECT STATS -->
-  <section class="section muted fade">
-    <div class="container stats-grid">
-      <div class="stat-card">
-        <strong>250+</strong>
-        <span>Projects Completed</span>
-      </div>
-      <div class="stat-card">
-        <strong>98%</strong>
-        <span>On-Time Delivery</span>
-      </div>
-      <div class="stat-card">
-        <strong>95%</strong>
-        <span>Repeat Clients</span>
-      </div>
-      <div class="stat-card">
-        <strong>0</strong>
-        <span>Major Safety Incidents</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section slide">
+  <section class="projects-section">
     <div class="container">
-      <h2>Looking for Proven Project Experience?</h2>
-      <p>
-        Explore how Dee Arr Constructions can support your
-        residential, commercial or interior project.
-      </p>
-      <a href="contact.html" class="primary-btn">Discuss Your Project</a>
+      <div class="projects-grid">
+
+        <article class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" alt="Residential Project">
+          </div>
+          <div class="project-content">
+            <span class="project-tag">Residential</span>
+            <h3>Luxury Villa Construction</h3>
+            <p>
+              A premium residential project built with high-quality
+              materials and modern architectural design.
+            </p>
+            <a href="#" class="project-link">View Project →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd" alt="Commercial Project">
+          </div>
+          <div class="project-content">
+            <span class="project-tag">Commercial</span>
+            <h3>Office Complex Development</h3>
+            <p>
+              A multi-storey commercial building delivered on time
+              with strict safety and quality control.
+            </p>
+            <a href="#" class="project-link">View Project →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1590650046871-92c887180603" alt="Renovation Project">
+          </div>
+          <div class="project-content">
+            <span class="project-tag">Renovation</span>
+            <h3>Structural Renovation Project</h3>
+            <p>
+              Complete structural reinforcement and interior
+              remodeling of an existing building.
+            </p>
+            <a href="#" class="project-link">View Project →</a>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      © 2026 Dee Arr Constructions
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div>
+          <h4>DEE ARR CONSTRUCTIONS</h4>
+          <p style="line-height:1.6; color:#777;">
+            A leader in the construction industry, dedicated to engineering excellence
+            and sustainable development across the globe.
+          </p>
+        </div>
+        <!-- Col 2 -->
+        <div>
+          <h4>Quick Links</h4>
+          <a href="solutions.html">Services</a>
+          <a href="projects.html">Portfolio</a>
+          <a href="about.html">Company Profile</a>
+          <a href="careers.html">Careers</a>
+        </div>
+        <!-- Col 3 -->
+        <div>
+          <h4>Connect</h4>
+          <a href="#">LinkedIn</a>
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
+        </div>
+        <!-- Col 4 -->
+        <div>
+          <h4>Contact</h4>
+          <a href="mailto:info@deearr.com">info@deearr.com</a>
+          <a href="tel:+919876543210">+91 98765 43210</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <span>© 2026 Dee Arr Constructions. All Rights Reserved.</span>
+        <span>Privacy Policy</span>
+      </div>
     </div>
   </footer>
 
+  <script src="js/projects.js"></script>
+  <script src="js/common.js"></script>
 </body>
 
 </html>

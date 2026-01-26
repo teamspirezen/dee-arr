@@ -2,191 +2,242 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Dee Arr Constructions</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/about.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us</title>
   <link rel="stylesheet" href="css/global.css">
-
+  <link rel="stylesheet" href="css/about.css">
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
-  <header class="site-header">
-    <div class="container nav">
-      <div class="logo">DEE ARR</div>
-      <nav>
+  <!-- HEADER -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">DEE ARR <span class="text-accent">.</span></a>
+
+      <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="solutions.html">Solutions</a>
         <a href="process.html">Process</a>
         <a href="projects.html">Projects</a>
         <a href="about.html">About</a>
-        <a href="contact.html" class="nav-cta">Contact</a>
+        <a href="contact.html">Contact</a>
       </nav>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </header>
 
+  <!-- MOBILE MENU OVERLAY -->
+  <div class="mobile-menu-overlay">
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-header">
+        <div class="mobile-logo">DEE ARR <span class="text-accent">.</span></div>
+        <button class="close-menu">&times;</button>
+      </div>
+      <nav class="mobile-nav">
+        <a href="index.html">Home</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="process.html">Process</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <a href="contact.html" class="btn btn-primary" style="width:100%; text-align:center">Get a Quote</a>
+      </div>
+    </div>
+  </div>
 
-  <!-- INTRO -->
-  <section class="intro fade">
-    <div class="container">
-      <h1>About Dee Arr Constructions</h1>
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="overlay"></div>
+    <div class="container hero-content">
+      <h1>About <span>Us</span></h1>
       <p>
-        Dee Arr Constructions is a professionally managed construction firm
-        delivering reliable residential, commercial and interior projects
-        with structured execution and long-term value.
+        Building strong foundations through quality construction,
+        innovation, and long-term trust.
       </p>
     </div>
   </section>
 
-  <!-- COMPANY OVERVIEW -->
-  <section class="section slide">
-    <div class="container two-col">
-      <div>
-        <h2>Company Overview</h2>
+  <!-- WHO WE ARE -->
+  <section class="about-section">
+    <div class="container about-grid reveal">
+      <div class="about-text">
+        <h2>Who <span>We Are</span></h2>
         <p>
-          Established in 2001, Dee Arr Constructions has built its reputation
-          on disciplined project execution, quality-driven processes and
-          transparent communication.
+          We are a professional construction company delivering
+          residential, commercial, and infrastructure projects
+          with uncompromised quality and safety.
         </p>
         <p>
-          Our approach combines technical expertise, experienced leadership
-          and systematic workflows to ensure every project meets defined
-          quality, safety and delivery benchmarks.
+          Our strength lies in experienced leadership, skilled manpower,
+          transparent processes, and a commitment to excellence
+          at every stage of construction.
         </p>
       </div>
 
-      <div class="highlight-card">
-        <h3>Our Foundation</h3>
-        <ul>
-          <li>✔ Structured planning & execution</li>
-          <li>✔ Quality & safety compliance</li>
-          <li>✔ Timely project delivery</li>
-          <li>✔ Client-focused approach</li>
-        </ul>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e" alt="Construction site">
       </div>
     </div>
   </section>
 
-  <!-- METRICS -->
-  <section class="metrics slide">
-    <div class="container metrics-grid">
-      <div class="metric-card">
-        <strong>20+</strong>
-        <span>Years of Experience</span>
-      </div>
-      <div class="metric-card">
-        <strong>250+</strong>
-        <span>Projects Completed</span>
-      </div>
-      <div class="metric-card">
-        <strong>98%</strong>
-        <span>Client Satisfaction</span>
-      </div>
-      <div class="metric-card">
-        <strong>100%</strong>
-        <span>Safety Compliance</span>
+  <!-- JOURNEY -->
+  <section class="journey-section">
+    <div class="container reveal">
+      <h2 class="center">Our <span>Journey</span></h2>
+
+      <div class="journey-grid">
+        <div class="journey-step">
+          <span>2014</span>
+          <p>Company Founded</p>
+        </div>
+        <div class="journey-step">
+          <span>2017</span>
+          <p>50+ Projects Delivered</p>
+        </div>
+        <div class="journey-step">
+          <span>2020</span>
+          <p>Commercial Expansion</p>
+        </div>
+        <div class="journey-step">
+          <span>2024</span>
+          <p>150+ Successful Projects</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- VALUES -->
-  <section class="section muted slide">
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container stats-grid">
+      <div class="stat reveal">
+        <h3 data-count="10">0</h3>
+        <p>Years Experience</p>
+      </div>
+      <div class="stat reveal">
+        <h3 data-count="150">0</h3>
+        <p>Projects Completed</p>
+      </div>
+      <div class="stat reveal">
+        <h3 data-count="100">0</h3>
+        <p>Client Satisfaction</p>
+      </div>
+      <div class="stat reveal">
+        <h3 data-count="50">0</h3>
+        <p>Skilled Professionals</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE VALUES -->
+  <section class="values-section">
     <div class="container">
-      <h2>Our Core Values</h2>
+      <h2 class="center reveal">Our <span>Core Values</span></h2>
 
-      <div class="cards-grid">
-        <div class="value-card">
-          <h3>Quality Commitment</h3>
-          <p>
-            Every project is executed with strict quality benchmarks
-            and continuous inspections.
-          </p>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <h4>Quality</h4>
+          <p>Superior materials and workmanship without compromise.</p>
         </div>
-
-        <div class="value-card">
-          <h3>Safety First</h3>
-          <p>
-            We follow robust safety protocols to protect people,
-            assets and project integrity.
-          </p>
+        <div class="value-card reveal">
+          <h4>Safety</h4>
+          <p>Strict safety practices across all sites and teams.</p>
         </div>
-
-        <div class="value-card">
-          <h3>Transparency</h3>
-          <p>
-            Clear communication and documentation at every project stage.
-          </p>
+        <div class="value-card reveal">
+          <h4>Integrity</h4>
+          <p>Transparent, ethical, and responsible construction.</p>
         </div>
-
-        <div class="value-card">
-          <h3>Accountability</h3>
-          <p>
-            Ownership and responsibility across planning, execution
-            and delivery.
-          </p>
+        <div class="value-card reveal">
+          <h4>Commitment</h4>
+          <p>On-time delivery with budget control.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PERFORMANCE BARS -->
-  <section class="section slide">
-    <div class="container">
-      <h2>Performance Indicators</h2>
+  <!-- EXPERTISE -->
+  <section class="skills-section">
+    <div class="container reveal">
+      <h2>Our <span>Expertise</span></h2>
 
-      <div class="performance">
-        <label>Project Planning Accuracy</label>
-        <div class="bar">
-          <div style="width:92%"></div>
-        </div>
+      <div class="skill">
+        <p>Residential Construction</p>
+        <div class="progress"><span style="width:90%"></span></div>
+      </div>
 
-        <label>Execution Quality</label>
-        <div class="bar">
-          <div style="width:90%"></div>
-        </div>
+      <div class="skill">
+        <p>Commercial Projects</p>
+        <div class="progress"><span style="width:85%"></span></div>
+      </div>
 
-        <label>On-Time Delivery</label>
-        <div class="bar">
-          <div style="width:88%"></div>
-        </div>
-
-        <label>Client Retention</label>
-        <div class="bar">
-          <div style="width:95%"></div>
-        </div>
+      <div class="skill">
+        <p>Renovation & Retrofitting</p>
+        <div class="progress"><span style="width:80%"></span></div>
       </div>
     </div>
   </section>
 
-  <!-- WHY CHOOSE US -->
-  <section class="section muted fade">
-    <div class="container">
-      <h2>Why Choose Dee Arr</h2>
-      <p>
-        Clients choose Dee Arr Constructions for our reliability,
-        structured processes and consistent delivery performance.
-      </p>
-
-      <div class="choose-grid">
-        <div>✔ Proven track record</div>
-        <div>✔ Experienced leadership</div>
-        <div>✔ Strong quality control systems</div>
-        <div>✔ Transparent project management</div>
-        <div>✔ Safety-focused execution</div>
-        <div>✔ Long-term client relationships</div>
-      </div>
+  <!-- CTA -->
+  <section class="about-cta">
+    <div class="container reveal">
+      <h2>Let’s Build Something <span>Strong</span></h2>
+      <p>Partner with us for reliable, future-ready construction.</p>
+      <a href="contact.html" class="btn">Contact Us</a>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      © 2026 Dee Arr Constructions
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div>
+          <h4>DEE ARR CONSTRUCTIONS</h4>
+          <p style="line-height:1.6; color:#777;">
+            A leader in the construction industry, dedicated to engineering excellence
+            and sustainable development across the globe.
+          </p>
+        </div>
+        <!-- Col 2 -->
+        <div>
+          <h4>Quick Links</h4>
+          <a href="solutions.html">Services</a>
+          <a href="projects.html">Portfolio</a>
+          <a href="about.html">Company Profile</a>
+          <a href="careers.html">Careers</a>
+        </div>
+        <!-- Col 3 -->
+        <div>
+          <h4>Connect</h4>
+          <a href="#">LinkedIn</a>
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
+        </div>
+        <!-- Col 4 -->
+        <div>
+          <h4>Contact</h4>
+          <a href="mailto:info@deearr.com">info@deearr.com</a>
+          <a href="tel:+919876543210">+91 98765 43210</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <span>© 2026 Dee Arr Constructions. All Rights Reserved.</span>
+        <span>Privacy Policy</span>
+      </div>
     </div>
   </footer>
 
+  <script src="js/about.js"></script>
+  <script src="js/common.js"></script>
 </body>
 
 </html>
