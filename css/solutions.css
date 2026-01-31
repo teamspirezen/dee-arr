@@ -16,7 +16,9 @@ body {
   background-color: var(--bg-dark);
   background-image: url('../assets/images/solutions_hero_new.png');
   background-size: cover;
+  background-size: cover;
   background-position: center;
+  overflow: hidden;
 }
 
 .hero-video {
@@ -110,6 +112,7 @@ body {
 
 /* STICKY SERVICES SECTION */
 .services-wrapper {
+  padding: 120px 0;
   padding: 120px 0;
   background: var(--bg-dark);
 }

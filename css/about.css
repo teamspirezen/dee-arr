@@ -12,6 +12,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 
 .hero-bg {
@@ -67,6 +68,7 @@
 .philosophy-section {
   padding: 120px 0;
   background: var(--bg-dark);
+  overflow: hidden;
 }
 
 .philosophy-grid {
@@ -154,6 +156,7 @@
   line-height: 1;
   margin-bottom: 10px;
   background: linear-gradient(to bottom, #fff, #666);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -188,7 +191,6 @@
 
 .leader-card {
   position: relative;
-  group: 1;
 }
 
 .leader-image {

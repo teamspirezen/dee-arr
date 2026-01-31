@@ -11,6 +11,7 @@
   /* 100vh per step + extra */
   position: relative;
   background: var(--bg-dark);
+  overflow-x: hidden;
 }
 
 /* --- STICKY VIEWPORT --- */
@@ -89,6 +90,7 @@
   letter-spacing: -0.03em;
   margin-bottom: 16px;
   background: linear-gradient(to right, #fff, #888);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
