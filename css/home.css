@@ -60,6 +60,7 @@ button {
   outline: none;
 }
 
+/* --- UTILITIES --- */
 
 
 .reveal-text {
@@ -731,6 +732,8 @@ header.scrolled {
   .hamburger {
     display: flex;
   }
+
+
 
   /* Glass Header Mobile */
   header {

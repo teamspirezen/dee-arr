@@ -7,12 +7,9 @@
 /* --- HERO --- */
 .cinematic-hero {
   position: relative;
-  height: 90vh;
-  display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  position: relative;
 }
 
 .hero-bg {
@@ -68,6 +65,7 @@
 .philosophy-section {
   padding: 120px 0;
   background: var(--bg-dark);
+  position: relative;
   overflow: hidden;
 }
 

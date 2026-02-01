@@ -30,8 +30,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Ensure no horizontal scroll globally */
 html {
+  width: 100%;
+}
+
+body {
   overflow-x: hidden;
+  width: 100%;
 }
 
 a {
@@ -55,15 +61,8 @@ button {
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 0 40px;
-  width: 100%;
-}
-
-@media (max-width: 900px) {
-  .container {
-    width: 100%;
-    padding: 0 24px;
-  }
+  width: 90%;
+  padding: 0;
 }
 
 .text-accent {
@@ -368,6 +367,13 @@ header.scrolled {
 
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
+
+  /* Centralized Mobile Container */
+  .container {
+    width: 100%;
+    padding: 0 24px;
+  }
+
   .nav-links {
     display: none;
   }
@@ -404,9 +410,7 @@ header.scrolled {
     text-align: center;
   }
 
-  .copyright {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
+  .container {
+    padding: 0 24px;
   }
 }

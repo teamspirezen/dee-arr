@@ -370,7 +370,6 @@
     height: auto;
     /* Dissable horizontal scroll on mobile */
     overflow: hidden;
-    overflow-x: hidden;
   }
 
   .projects-sticky-view {

@@ -92,4 +92,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial run
     update();
+
+    // --- SCROLL JACKING Logic ---
+    let isAnimating = false;
+    let currentSection = 0; // 0 = Intro, 1-5 = Steps.
+
+    // Calculate current section on load/refresh
+    currentSection = Math.round(window.scrollY / window.innerHeight);
+
+    window.addEventListener('wheel', (e) => {
+        // Only trigger if not currently animating
+        if (isAnimating) {
+            e.preventDefault();
+            return;
+        }
+
+        e.preventDefault();
+
+        const direction = e.deltaY > 0 ? 1 : -1;
+        const vh = window.innerHeight;
+        const maxScroll = document.body.scrollHeight - vh;
+
+        let nextSection = currentSection + direction;
+
+        // Boundaries
+        // 0 is top. 
+        // Max sections depends on height. 600vh container = 6 sections (0 to 5) + footer flow?
+        // Let's rely on scrollHeight.
+        const maxSections = Math.ceil(document.body.scrollHeight / vh) - 1;
+
+        if (nextSection < 0) nextSection = 0;
+        if (nextSection > maxSections) nextSection = maxSections;
+
+        const targetScroll = nextSection * vh;
+
+        // Only animate if changed or clamping
+        if (targetScroll !== window.scrollY) {
+            isAnimating = true;
+            currentSection = nextSection;
+
+            window.scrollTo({
+                top: targetScroll,
+                behavior: 'smooth'
+            });
+
+            // Cooldown to match transition speed + buffer
+            setTimeout(() => {
+                isAnimating = false;
+            }, 1000);
+        } else {
+            // We are at edge
+            isAnimating = false;
+        }
+
+    }, { passive: false });
+
+    // Sync on resize/orientation change
+    window.addEventListener('resize', () => {
+        currentSection = Math.round(window.scrollY / window.innerHeight);
+    });
+
 });
