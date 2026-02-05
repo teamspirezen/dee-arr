@@ -10,6 +10,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  display: flex;
+  height: 100vh;
 }
 
 .hero-bg {
@@ -232,6 +234,7 @@
   padding: 160px 0;
   text-align: center;
   background: url("https://images.unsplash.com/photo-1487958449943-2429e8be8625") center/cover fixed no-repeat;
+  background-image: url('../assets/images/overall house 3.jpeg');
   overflow: hidden;
 }
 
@@ -311,8 +314,32 @@
 
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
+  .cinematic-hero {
+    padding-top: 100px;
+    /* Reduced padding */
+    min-height: auto;
+    /* Allow auto height */
+    padding-bottom: 60px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-content {
+    margin-top: 0;
+  }
+
   .hero-content h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+    padding: 0 10px;
+  }
+
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
   .philosophy-grid {
@@ -324,12 +351,35 @@
     font-size: 2.5rem;
   }
 
+  /* Impact Section Mobile Adjustments */
   .impact-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 30px;
+  }
+
+  .impact-number {
+    font-size: 2.5rem;
+  }
+
+  /* Leadership Grid Fix for Small Screens */
+  .leaders-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
   }
 
   .about-cta-cinematic h2 {
     font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 }

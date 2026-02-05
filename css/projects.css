@@ -396,6 +396,17 @@
     display: none;
   }
 
+  .card-overlay {
+    opacity: 1;
+    /* Always visible on mobile */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  }
+
+  .overlay-content {
+    transform: translateY(0);
+  }
+
+
   .detail-grid {
     grid-template-columns: 1fr;
     gap: 40px;

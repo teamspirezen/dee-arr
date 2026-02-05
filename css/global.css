@@ -414,3 +414,16 @@ header.scrolled {
     padding: 0 24px;
   }
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  /* Prevent horizontal overflow on very small devices */
+  body,
+  html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
