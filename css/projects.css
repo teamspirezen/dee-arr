@@ -390,20 +390,57 @@
 
   .project-card {
     width: 100%;
+    aspect-ratio: auto;
+    /* Remove fixed aspect ratio */
+    margin-bottom: 30px;
+    /* Add spacing between cards */
+  }
+
+  /* Make the card a column flex container */
+  .card-inner {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    /* Let content dictate height */
+  }
+
+  .card-image {
+    height: 250px;
+    /* Fixed height for image */
+    flex-shrink: 0;
   }
 
   .projects-progress {
     display: none;
   }
 
+  /* Move overlay below image */
   .card-overlay {
+    position: relative;
+    inset: auto;
     opacity: 1;
-    /* Always visible on mobile */
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    background: #161616;
+    /* Solid dark background */
+    padding: 30px;
+    transform: none;
   }
 
   .overlay-content {
     transform: translateY(0);
+  }
+
+  .project-category {
+    margin-bottom: 8px;
+  }
+
+  .overlay-content h3 {
+    font-size: 1.8rem;
+  }
+
+  .overlay-content p {
+    font-size: 1rem;
+    color: #bbb;
+    margin-bottom: 20px;
   }
 
 

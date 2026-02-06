@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalSteps = steps.length;
 
     function update() {
+        if (window.innerWidth <= 900) return;
+
         const rect = track.getBoundingClientRect();
         const viewHeight = window.innerHeight;
         const trackHeight = rect.height;
@@ -101,6 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
     currentSection = Math.round(window.scrollY / window.innerHeight);
 
     window.addEventListener('wheel', (e) => {
+        // Disable scroll jacking on mobile
+        if (window.innerWidth <= 900) return;
+
         // Only trigger if not currently animating
         if (isAnimating) {
             e.preventDefault();

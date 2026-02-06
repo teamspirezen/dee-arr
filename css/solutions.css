@@ -14,7 +14,7 @@ body {
   align-items: center;
   overflow: hidden;
   background-color: var(--bg-dark);
-  background-image: url('../assets/images/solutions_hero_new.png');
+  background-image: url('../assets/images/construction brick 1.jpeg');
   background-size: cover;
   background-position: center;
 }
@@ -179,7 +179,7 @@ body {
 /* VISUAL BREAK (PARALLAX) */
 .visual-break {
   height: 60vh;
-  background: url('https://images.unsplash.com/photo-1487958449943-2429e8be8625') center/cover no-repeat fixed;
+  background: url('../assets/images/overall house 5.jpeg') center/cover no-repeat fixed;
   /* Fixed = CSS Parallax */
   position: relative;
   display: flex;
@@ -332,50 +332,45 @@ body {
   }
 
   /* Stack Mobile */
-  .stack-content {
-    grid-template-columns: 1fr;
+  .stack-content,
+  .stack-card:nth-child(even) .stack-content,
+  .stack-card:nth-child(odd) .stack-content {
+    grid-template-columns: 1fr !important;
     padding: 30px;
     gap: 30px;
+    text-align: center;
+    /* Optional: Center text on mobile for better look */
   }
 
   .stack-img {
     height: 250px;
     order: -1;
     /* Image first on mobile */
+    width: 100%;
   }
 
   .stack-text h3 {
     font-size: 1.8rem;
   }
 
-  /* Adjust sticky tops for mobile */
-  .stack-card:nth-child(1) {
-    top: 100px;
+  /* Disable Sticky Stacking on Mobile for clean scroll */
+  .stack-card {
+    position: relative;
+    top: 0 !important;
+    margin-bottom: 40px;
+    transform: none !important;
   }
 
-  .stack-card:nth-child(2) {
-    top: 120px;
-  }
-
-  .stack-card:nth-child(3) {
-    top: 140px;
-  }
-
-  .stack-card:nth-child(4) {
-    top: 160px;
-  }
-
-  /* Disable Sticky Stacking on Mobile if height is small */
-  @media (max-height: 700px) {
-    .stack-card {
-      position: relative;
-      top: 0 !important;
-      margin-bottom: 40px;
-      transform: none !important;
-    }
+  .stack-card:nth-child(n) {
+    top: 0 !important;
   }
 
   .center-text h2 {
     font-size: 2rem;
+  }
+
+  .stack-wrapper {
+    padding: 60px 0 100px;
+    /* Reduce padding on mobile */
   }
 }

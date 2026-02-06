@@ -398,65 +398,113 @@
 
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
+  .process-container {
+    height: auto;
+    overflow: hidden;
+  }
+
+  .process-sticky-view {
+    position: relative;
+    top: auto;
+    height: auto;
+    overflow: visible;
+    display: block;
+    padding-bottom: 80px;
+  }
+
+  .process-intro {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    margin: 80px auto 40px;
+    width: 90%;
+  }
+
   .process-intro h1 {
     font-size: 2.5rem;
   }
 
-  .process-step {
-    width: 90%;
-    /* Ensure padding for mobile scroll */
-    padding-bottom: 80px;
-    top: 55%;
-    /* Adjust center slightly */
+  .process-steps-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    /* Space between steps */
+    padding-bottom: 100px;
   }
 
-  .process-container {
-    /* height auto might break scroll logic which relies on scrollY. 
-       Keep height but maybe adjust spacing? 
-       Actually, common pattern is to keep height big. */
+  .process-step {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none !important;
+    /* Override JS transforms */
+    opacity: 1 !important;
+    /* Force visible */
+    pointer-events: auto;
+    width: 90%;
+    margin: 0 auto;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
   }
 
   .step-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    opacity: 1;
+    transform: none;
   }
 
   .step-intent {
     font-size: 1.1rem;
+    opacity: 1;
+    transform: none;
   }
 
   .step-details {
     grid-template-columns: 1fr;
     gap: 30px;
     margin-top: 20px;
+    opacity: 1;
   }
 
   .step-bg-number {
-    font-size: 40vw;
+    font-size: 15rem;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
   }
 
   .step-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
-    text-align: center;
+    gap: 40px;
+    text-align: left;
+    /* Keep left alignment */
   }
 
   .step-visual {
     height: 250px;
-    transform: translateY(30px);
+    transform: none !important;
+    opacity: 1 !important;
+    width: 100%;
+    border: none;
+  }
+
+  .step-visual img {
+    transform: none !important;
   }
 
   .step-text-content {
-    transform: translateY(30px);
-    align-items: center;
+    transform: none !important;
+    opacity: 1 !important;
+    align-items: flex-start;
+    /* Align text left */
   }
 
-  .process-step.active .step-visual,
-  .process-step.active .step-text-content {
-    transform: translateY(0);
-  }
-
-  .step-details {
-    text-align: left;
-    /* Keep details left aligned even on mobile if preferred, or center */
+  .progress-bar-container {
+    display: none;
   }
 }
