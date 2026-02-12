@@ -429,6 +429,31 @@ header.scrolled {
   color: #fff;
 }
 
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.social-links a {
+  color: #777;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.social-links a:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.social-links svg {
+  fill: currentColor;
+}
+
 .copyright {
   border-top: 1px solid #1a1a1a;
   padding-top: 40px;
