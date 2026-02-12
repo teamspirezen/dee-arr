@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Upload - DEE ARR</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        /* Critical Anti-Flicker */
+        html,
+        body {
+            background-color: #111;
+        }
+
+        /* --- LOADER --- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-line {
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            margin-top: 20px;
+            animation: loadLine 2s ease-in-out forwards;
+        }
+
+        @keyframes loadLine {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 200px;
+            }
+        }
+
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .upload-section {
+            padding: 100px 0;
+            background: #111;
+            color: #fff;
+            min-height: 80vh;
+        }
+
+        .upload-card {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .upload-card h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: var(--accent);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn-upload {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-upload:hover {
+            opacity: 0.9;
+        }
+
+        .status-msg {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .success {
+            color: #4caf50;
+        }
+
+        .error {
+            color: #ff4d4d;
+        }
+
+        /* --- MODAL STYLES --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            margin: auto;
+            padding: 40px;
+            border: 1px solid var(--accent);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            position: relative;
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .close-modal {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .close-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="logo-loader" style="color:#fff; font-size: 2rem; font-weight:900; letter-spacing:-0.05em">DEE ARR
+        </div>
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">DEE ARR <span class="text-accent">.</span></a>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="solutions.html">Solutions</a>
+                <a href="process.html">Process</a>
+                <a href="projects.html">Projects</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <div class="mobile-logo">DEE ARR <span class="text-accent">.</span></div>
+                <button class="close-menu">&times;</button>
+            </div>
+            <nav class="mobile-nav">
+                <a href="index.html">Home</a>
+                <a href="solutions.html">Solutions</a>
+                <a href="process.html">Process</a>
+                <a href="projects.html">Projects</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="mobile-menu-footer">
+                <a href="contact.html" class="btn btn-primary" style="width:100%; text-align:center">Get a Quote</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="upload-section">
+        <div class="container">
+            <div class="upload-card">
+                <h2>Upload Project Details</h2>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="title">Project Title *</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Project Image</label>
+                        <input type="file" id="image" name="image" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="document">Project Document (PDF)</label>
+                        <input type="file" id="document" name="document" accept=".pdf,.doc,.docx">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zip">Additional Files (ZIP)</label>
+                        <input type="file" id="zip" name="zip" accept=".zip,.rar">
+                    </div>
+
+                    <button type="submit" class="btn-upload">Submit Project</button>
+                    <div id="statusMsg" class="status-msg"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">✅</div>
+            <h3>Upload Successful!</h3>
+            <p>Thank you for submitting your project details.<br>Our team will review the documents and contact you
+                within <strong>24-48 hours</strong>.</p>
+            <button class="close-modal" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Col 1 -->
+                <div>
+                    <h4>DEE ARR CONSTRUCTION</h4>
+                    <p style="line-height:1.6; color:#777;">
+                        A leader in the construction industry, dedicated to engineering excellence
+                        and sustainable development across the globe.
+                    </p>
+                </div>
+                <!-- Col 2 -->
+                <div>
+                    <h4>Quick Links</h4>
+                    <a href="solutions.html">Services</a>
+                    <a href="projects.html">Portfolio</a>
+                    <a href="about.html">Company Profile</a>
+                    <a href="careers.html">Careers</a>
+                </div>
+                <!-- Col 3 -->
+                <div>
+                    <h4>Connect</h4>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                    <a href="https://www.instagram.com/deearrconstruction/">Instagram</a>
+                </div>
+                <!-- Col 4 -->
+                <div>
+                    <h4>Contact</h4>
+                    <a href="mailto:deearrconstruction2001@gmail.com">deearrconstruction2001@gmail.com</a>
+                    <a href="tel:+918825696200">+91 88256 96200</a>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <span>© 2026 Dee Arr Construction. All Rights Reserved.</span>
+                <span>Privacy Policy</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Remove Loader on Load
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if (loader) loader.classList.add('fade-out');
+            }, 800); // Slight delay for smoothness
+        });
+
+        const modal = document.getElementById('successModal');
+
+        function openModal() {
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            // Optional: Redirect or clear form further if needed
+        }
+
+        // Close on outside click
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const statusMsg = document.getElementById('statusMsg');
+            const submitBtn = document.querySelector('.btn-upload');
+
+            // Disable button
+            submitBtn.disabled = true;
+            statusMsg.textContent = "Uploading...";
+            statusMsg.className = "status-msg";
+
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    statusMsg.textContent = ""; // Clear text message
+                    this.reset();
+                    openModal(); // Show Fancy Modal
+                } else {
+                    statusMsg.textContent = "Upload Failed: " + (result.error || "Unknown error");
+                    statusMsg.className = "status-msg error";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                statusMsg.textContent = "Error connecting to server.";
+                statusMsg.className = "status-msg error";
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+    <script src="js/common.js"></script>
+</body>
+
+</html>

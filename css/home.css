@@ -302,6 +302,91 @@ header.scrolled {
   position: relative;
 }
 
+/* --- PARTNERS SCROLL --- */
+.partners-section {
+  padding: 60px 0;
+  background: #0f0f0f;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+.partners-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.scrolling-track {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide-group {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  /* Space between logos */
+  padding-right: 60px;
+  flex-shrink: 0;
+  /* Prevent shrinking */
+}
+
+/* Left to Right (Reverse of usual marquee which is R->L, wait. 
+   User asked: "one form left to right, another one right to left" 
+*/
+
+/* Line 1: Left -> Right */
+.scroll-left .slide-group {
+  animation: scrollLeftToRight 40s linear infinite;
+}
+
+/* Line 2: Right -> Left */
+.scroll-right .slide-group {
+  animation: scrollRightToLeft 40s linear infinite;
+}
+
+.scrolling-track:hover .slide-group {
+  animation-play-state: paused;
+}
+
+.slide-group img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.8);
+  transition: 0.3s;
+  opacity: 0.7;
+}
+
+.slide-group img:hover {
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+@keyframes scrollRightToLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scrollLeftToRight {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .intro-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -552,6 +637,87 @@ header.scrolled {
 .cta-content h2 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   margin-bottom: 30px;
+}
+
+/* --- INSTAGRAM SECTION --- */
+.instagram-section {
+  padding: 100px 0;
+  background: #111;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.instagram-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.insta-icon {
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.instagram-header h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.instagram-header p {
+  color: var(--text-muted);
+}
+
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.insta-item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  display: block;
+}
+
+.insta-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.insta-item:hover img {
+  transform: scale(1.1);
+}
+
+.insta-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.insta-item:hover .insta-overlay {
+  opacity: 1;
+}
+
+.insta-overlay span {
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid #fff;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+.instagram-footer {
+  text-align: center;
 }
 
 /* --- FOOTER --- */
