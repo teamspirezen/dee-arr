@@ -171,6 +171,11 @@
         .project-card {
             animation: fadeIn 0.4s ease-out forwards;
         }
+
+        /* Hide WhatsApp on Admin Dashboard */
+        .whatsapp-sticky {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -232,12 +237,27 @@
         <div class="container">
             <div class="dashboard-header">
                 <h2>Admin Dashboard</h2>
-                <a href="client_upload.html" class="btn-upload">+ Upload New Project</a>
             </div>
 
-            <div id="projectList" class="project-grid">
-                <!-- Projects will be loaded here -->
-                <p style="color:#777;">Loading projects...</p>
+            <!-- Client Uploads Section -->
+            <h3 style="color:#ccc; margin-bottom:20px; border-bottom:1px solid #333; padding-bottom:10px;">Client
+                Uploaded Projects</h3>
+            <div id="clientProjectList" class="project-grid">
+                <!-- Client Projects will be loaded here -->
+                <p style="color:#777;">Loading...</p>
+            </div>
+
+            <div style="margin-top: 80px;"></div>
+
+            <!-- Admin Uploads Section -->
+            <div class="dashboard-header"
+                style="margin-bottom:20px; border-bottom:1px solid #333; padding-bottom:10px;">
+                <h3 style="color:#ccc; margin:0;">Admin Uploaded Documents</h3>
+                <a href="client_upload.html?mode=admin" class="btn-upload">+ Upload New Document</a>
+            </div>
+            <div id="adminProjectList" class="project-grid">
+                <!-- Admin Projects will be loaded here -->
+                <p style="color:#777;">Loading...</p>
             </div>
         </div>
     </section>
@@ -310,46 +330,40 @@
 
         // Fetch Projects
         async function fetchProjects() {
-            const projectList = document.getElementById('projectList');
+            const clientList = document.getElementById('clientProjectList');
+            const adminList = document.getElementById('adminProjectList');
+
             try {
                 // Add timestamp to prevent caching
                 const response = await fetch('/api/projects?t=' + new Date().getTime());
                 const data = await response.json();
 
-                if (data.projects && data.projects.length > 0) {
-                    projectList.innerHTML = ''; // Clear loading text
-                    data.projects.forEach((project, index) => {
-                        const card = document.createElement('div');
-                        card.className = 'project-card';
-                        card.style.animationDelay = `${index * 0.1}s`; // Staggered fade in
+                if (data.projects) {
+                    clientList.innerHTML = '';
+                    adminList.innerHTML = '';
 
-                        // Handle paths - relative to current domain
-                        const imgSrc = project.image_path ? project.image_path : 'assets/images/placeholder.jpg';
+                    const clientProjects = data.projects.filter(p => !p.uploader_type || p.uploader_type === 'client');
+                    const adminProjects = data.projects.filter(p => p.uploader_type === 'admin');
 
-                        let linksHtml = '';
-                        if (project.document_path) linksHtml += `<a href="${project.document_path}" target="_blank" class="file-link">Document</a>`;
-                        if (project.zip_path) linksHtml += `<a href="${project.zip_path}" target="_blank" class="file-link">Zip File</a>`;
+                    // Render Client Projects
+                    if (clientProjects.length > 0) {
+                        renderProjects(clientProjects, clientList);
+                    } else {
+                        clientList.innerHTML = '<p style="color:#ccc;">No client uploads yet.</p>';
+                    }
 
-                        card.innerHTML = `
-                            <img src="${imgSrc}" alt="${project.title}" class="project-img" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
-                            <div class="project-content">
-                                <h3 class="project-title">${project.title}</h3>
-                                <p class="project-desc">${project.description || 'No description provided.'}</p>
-                                <div class="file-links">
-                                    ${linksHtml}
-                                </div>
-                                <button onclick="deleteProject(${project.id})" style="background: #e74c3c; color: white; border: none; padding: 8px 10px; border-radius: 4px; cursor: pointer; margin-top: 15px; width: 100%; font-weight: 600; transition: 0.3s;">Delete Project</button>
-                            </div>
-                        `;
-                        projectList.appendChild(card);
-                    });
-                } else {
-                    projectList.innerHTML = '<p style="color:#ccc;">No projects uploaded yet.</p>';
+                    // Render Admin Projects
+                    if (adminProjects.length > 0) {
+                        renderProjects(adminProjects, adminList);
+                    } else {
+                        adminList.innerHTML = '<p style="color:#ccc;">No admin documents yet.</p>';
+                    }
                 }
 
             } catch (error) {
                 console.error('Error fetching projects:', error);
-                projectList.innerHTML = '<p style="color:#ff4d4d;">Failed to load projects. Ensure backend server is running.</p>';
+                clientList.innerHTML = '<p style="color:#ff4d4d;">Failed to load.</p>';
+                adminList.innerHTML = '<p style="color:#ff4d4d;">Failed to load.</p>';
             } finally {
                 // Hide loader after fetch (min 500ms to prevent flash)
                 setTimeout(() => {
@@ -358,6 +372,36 @@
                 }, 500);
             }
         }
+
+        function renderProjects(projects, container) {
+            projects.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.style.animationDelay = `${index * 0.1}s`; // Staggered fade in
+
+                // Handle paths - relative to current domain
+                const imgSrc = project.image_path ? project.image_path : 'assets/images/placeholder.jpg';
+
+                let linksHtml = '';
+                if (project.document_path) linksHtml += `<a href="${project.document_path}" target="_blank" class="file-link">Document</a>`;
+                if (project.zip_path) linksHtml += `<a href="${project.zip_path}" target="_blank" class="file-link">Zip File</a>`;
+
+                card.innerHTML = `
+                    <img src="${imgSrc}" alt="${project.title}" class="project-img" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-desc">${project.description || 'No description provided.'}</p>
+                        <div class="file-links">
+                            ${linksHtml}
+                        </div>
+                        <button onclick="deleteProject(${project.id})" style="background: #e74c3c; color: white; border: none; padding: 8px 10px; border-radius: 4px; cursor: pointer; margin-top: 15px; width: 100%; font-weight: 600; transition: 0.3s;">Delete</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+
 
         // Delete Project
         async function deleteProject(id) {

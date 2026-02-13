@@ -49,7 +49,7 @@ const cpUpload = upload.fields([
 
 // API to Upload Project
 app.post('/api/upload', cpUpload, (req, res) => {
-    const { title, description } = req.body;
+    const { title, description, uploader_type } = req.body;
 
     // Get file paths (relative to root for storage)
     // Note: req.files is an object with arrays of files
@@ -61,8 +61,11 @@ app.post('/api/upload', cpUpload, (req, res) => {
         return res.status(400).json({ error: "Title is required" });
     }
 
-    const query = `INSERT INTO projects (title, description, image_path, document_path, zip_path) VALUES (?, ?, ?, ?, ?)`;
-    const params = [title, description, imagePath, documentPath, zipPath];
+    // Default to 'client' if not provided
+    const type = uploader_type || 'client';
+
+    const query = `INSERT INTO projects (title, description, image_path, document_path, zip_path, uploader_type) VALUES (?, ?, ?, ?, ?, ?)`;
+    const params = [title, description, imagePath, documentPath, zipPath, type];
 
     db.run(query, params, function (err) {
         if (err) {

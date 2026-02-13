@@ -20,10 +20,21 @@ const db = new sqlite3.Database(dbPath, (err) => {
             image_path TEXT,
             document_path TEXT,
             zip_path TEXT,
+            uploader_type TEXT DEFAULT 'client',
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`, (err) => {
             if (err) {
                 console.error("Error creating table: " + err.message);
+            } else {
+                // Migration for existing tables
+                const migrationQuery = "ALTER TABLE projects ADD COLUMN uploader_type TEXT DEFAULT 'client'";
+                db.run(migrationQuery, (err) => {
+                    if (err && !err.message.includes('duplicate column name')) {
+                        console.error("Migration Warning (Safe to ignore if column exists): " + err.message);
+                    } else {
+                        console.log("Database schema checked/updated.");
+                    }
+                });
             }
         });
     }

@@ -135,6 +135,93 @@
             color: #ff4d4d;
         }
 
+        /* --- ADMIN TOGGLE STYLES --- */
+        .admin-toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #222;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid #333;
+        }
+
+        .admin-toggle-label {
+            color: #ccc;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #444;
+            transition: 0.4s;
+            border-radius: 26px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        .toggle-switch input:checked+.toggle-slider {
+            background-color: var(--accent);
+        }
+
+        .toggle-switch input:checked+.toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        .admin-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 6px 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
         /* --- MODAL STYLES --- */
         .modal {
             display: none;
@@ -274,7 +361,20 @@
     <section class="upload-section">
         <div class="container">
             <div class="upload-card">
-                <h2>Upload Project Details</h2>
+                <h2 id="uploadTitle">Upload Project Details</h2>
+
+                <!-- Admin Toggle -->
+                <div class="admin-toggle-container">
+                    <label class="admin-toggle-label">
+                        Admin Mode
+                        <span id="adminBadge" class="admin-badge" style="display: none;">ACTIVE</span>
+                    </label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="adminToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
                 <form id="uploadForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="title">Project Title *</label>
@@ -380,13 +480,60 @@
     </footer>
 
     <script>
+        // Admin password (in production, this should be stored securely on server)
+        const ADMIN_PASSWORD = "admin123";
+        let isAdminMode = false;
+
         // Remove Loader on Load
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 if (loader) loader.classList.add('fade-out');
-            }, 800); // Slight delay for smoothness
+            }, 800);
+
+            // Check for Admin Mode from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const mode = urlParams.get('mode');
+            if (mode === 'admin') {
+                isAdminMode = true;
+                document.getElementById('adminToggle').checked = true;
+                updateAdminUI(true);
+            }
+
+            // Admin Toggle Event Listener
+            const adminToggle = document.getElementById('adminToggle');
+            adminToggle.addEventListener('change', function () {
+                if (this.checked) {
+                    // Ask for password
+                    const password = prompt("Enter Admin Password:");
+                    if (password === ADMIN_PASSWORD) {
+                        isAdminMode = true;
+                        updateAdminUI(true);
+                    } else {
+                        alert("Incorrect password!");
+                        this.checked = false;
+                        isAdminMode = false;
+                    }
+                } else {
+                    isAdminMode = false;
+                    updateAdminUI(false);
+                }
+            });
         });
+
+        // Update UI based on admin mode
+        function updateAdminUI(isAdmin) {
+            const title = document.getElementById('uploadTitle');
+            const badge = document.getElementById('adminBadge');
+
+            if (isAdmin) {
+                title.textContent = 'Admin Document Upload';
+                badge.style.display = 'inline-block';
+            } else {
+                title.textContent = 'Upload Project Details';
+                badge.style.display = 'none';
+            }
+        }
 
         const modal = document.getElementById('successModal');
 
@@ -410,6 +557,10 @@
             e.preventDefault();
 
             const formData = new FormData(this);
+
+            // Append uploader_type based on toggle state
+            formData.append('uploader_type', isAdminMode ? 'admin' : 'client');
+
             const statusMsg = document.getElementById('statusMsg');
             const submitBtn = document.querySelector('.btn-upload');
 
