@@ -458,7 +458,10 @@ header.scrolled {
   border-top: 1px solid #1a1a1a;
   padding-top: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 /* --- RESPONSIVE --- */
@@ -522,4 +525,112 @@ header.scrolled {
     overflow-x: hidden;
     width: 100%;
   }
+}
+
+/* --- LOGO & BRANDING UPDATES --- */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+header.scrolled .logo img {
+  height: 40px;
+}
+
+/* Footer Logo Specifics */
+.footer-logo {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.footer-logo img {
+  height: 50px;
+  width: auto;
+}
+
+/* Spirezen Tooltip */
+.spirezen-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* Align to right if needed */
+}
+
+/* Copyright Text Wrapper */
+.copyright-text {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.spirezen-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0;
+  /* Removed extra margin */
+}
+
+.spirezen-icon {
+  height: 24px;
+  /* Slightly smaller for better text flow */
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  filter: brightness(0.8);
+  margin-top: 4px;
+  transform: translateY(1px);
+  /* Visual alignment correction */
+}
+
+.spirezen-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1);
+}
+
+.spirezen-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 100;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.spirezen-container:hover .spirezen-tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.spirezen-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
 }

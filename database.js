@@ -11,7 +11,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
         console.error('Error opening database ' + dbPath + ': ' + err.message);
     } else {
         console.log('Connected to the SQLite database.');
-        
+
         // Create table
         db.run(`CREATE TABLE IF NOT EXISTS projects (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,18 +26,35 @@ const db = new sqlite3.Database(dbPath, (err) => {
             if (err) {
                 console.error("Error creating table: " + err.message);
             } else {
-                // Migration for existing tables
-                const migrationQuery = "ALTER TABLE projects ADD COLUMN uploader_type TEXT DEFAULT 'client'";
-                db.run(migrationQuery, (err) => {
-                    if (err && !err.message.includes('duplicate column name')) {
-                        console.error("Migration Warning (Safe to ignore if column exists): " + err.message);
-                    } else {
-                        console.log("Database schema checked/updated.");
-                    }
-                });
+                custom_migration(db);
             }
         });
     }
 });
+
+function custom_migration(db) {
+    // Migration for uploader_type
+    db.run("ALTER TABLE projects ADD COLUMN uploader_type TEXT DEFAULT 'client'", (err) => {
+        if (err && !err.message.includes('duplicate column name')) {
+            console.error("Migration Warning (Safe to ignore if column exists): " + err.message);
+        }
+    });
+
+    // Migration for phone
+    db.run("ALTER TABLE projects ADD COLUMN phone TEXT", (err) => {
+        if (err && !err.message.includes('duplicate column name')) {
+            console.error("Migration Warning (phone): " + err.message);
+        }
+    });
+
+    // Migration for location
+    db.run("ALTER TABLE projects ADD COLUMN location TEXT", (err) => {
+        if (err && !err.message.includes('duplicate column name')) {
+            console.error("Migration Warning (location): " + err.message);
+        } else {
+            console.log("Database schema checked/updated.");
+        }
+    });
+}
 
 module.exports = db;

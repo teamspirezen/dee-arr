@@ -27,6 +27,7 @@
 
 html {
   scroll-behavior: smooth;
+  margin-bottom: 0;
 }
 
 body {
@@ -36,6 +37,7 @@ body {
   overflow-x: hidden;
   width: 100%;
   -webkit-font-smoothing: antialiased;
+  margin-bottom: 0;
 }
 
 a {
@@ -796,7 +798,10 @@ header.scrolled {
   border-top: 1px solid #1a1a1a;
   padding-top: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 /* --- MOBILE MENU (SIDE DRAWER) --- */
