@@ -126,6 +126,11 @@
             font-weight: 700;
             margin-bottom: 10px;
             color: #fff;
+
+            /* Truncation */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .project-desc {
@@ -133,6 +138,16 @@
             color: #ccc;
             margin-bottom: 15px;
             line-height: 1.5;
+
+            /* Multiline Truncation */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 4.5em;
+            /* Fallback height for 3 lines */
         }
 
         .file-links {
@@ -191,7 +206,8 @@
     <header>
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <img src="assets/logos/company_logo.jpeg" alt="DEE ARR">
+                <img src="assets/logos/DEE_ARR_Green_fixed.png" alt="DEE ARR">
+                <span class="logo-text">DEE ARR<span class="text-accent">.</span></span>
             </a>
 
             <nav class="nav-links">
@@ -216,8 +232,11 @@
     <div class="mobile-menu-overlay">
         <div class="mobile-menu-content">
             <div class="mobile-menu-header">
-                <div class="mobile-logo"><img src="assets/logos/company_logo.jpeg" alt="DEE ARR"
-                        style="height:35px; border-radius:4px;"></div>
+                <div class="mobile-logo">
+                    <img src="assets/logos/DEE_ARR_Green_fixed.png" alt="DEE ARR"
+                        style="height:35px; border-radius:4px;">
+                    <span class="logo-text">DEE ARR<span class="text-accent">.</span></span>
+                </div>
                 <button class="close-menu">&times;</button>
             </div>
             <nav class="mobile-nav">
@@ -272,7 +291,8 @@
                 <!-- Col 1 -->
                 <div>
                     <a href="index.html" class="footer-logo">
-                        <img src="assets/logos/company_logo.jpeg" alt="DEE ARR">
+                        <img src="assets/logos/DEE_ARR_Green_fixed.png" alt="DEE ARR">
+                        <span class="logo-text">DEE ARR<span class="text-accent">.</span></span>
                     </a>
                     <p style="line-height:1.6; color:#777;">
                         A leader in the construction industry, dedicated to engineering excellence
@@ -316,7 +336,7 @@
                 <div>
                     <h4>Contact</h4>
                     <a href="mailto:deearrconstruction2001@gmail.com">deearrconstruction2001@gmail.com</a>
-                    <a href="tel:+918825696200">+91 88256 96200</a>
+                    <a href="tel:+916369337252">+91 63693 37252</a>
                 </div>
             </div>
 
@@ -393,14 +413,15 @@
                 card.style.animationDelay = `${index * 0.1}s`; // Staggered fade in
 
                 // Handle paths - relative to current domain
-                const imgSrc = project.image_path ? project.image_path : 'assets/images/placeholder.jpg';
+                const placeholder = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22300%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22300%22%20height%3D%22200%22%20fill%3D%22%23333%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2214%22%20fill%3D%22%23777%22%3ENo%20Image%3C%2Ftext%3E%3C%2Fsvg%3E';
+                const imgSrc = project.image_path ? project.image_path : placeholder;
 
                 let linksHtml = '';
                 if (project.document_path) linksHtml += `<a href="${project.document_path}" target="_blank" class="file-link">Document</a>`;
                 if (project.zip_path) linksHtml += `<a href="${project.zip_path}" target="_blank" class="file-link">Zip File</a>`;
 
                 card.innerHTML = `
-                    <img src="${imgSrc}" alt="${project.title}" class="project-img" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                    <img src="${imgSrc}" alt="${project.title}" class="project-img" onerror="this.src='${placeholder}'">
                     <div class="project-content">
                         <h3 class="project-title">${project.title}</h3>
                         <p class="project-desc">${project.description || 'No description provided.'}</p>

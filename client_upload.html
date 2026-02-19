@@ -304,6 +304,54 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
+
+        /* --- PASSWORD MODAL SPECIFIC --- */
+        #passwordModal .modal-content {
+            max-width: 400px;
+            padding: 30px;
+        }
+
+        #passwordModal input {
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        #passwordModal input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn-cancel {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-confirm {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
     </style>
 </head>
 
@@ -319,7 +367,8 @@
     <header>
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <img src="assets/logos/company_logo.jpeg" alt="DEE ARR">
+                <img src="assets/logos/DEE_ARR_Green_fixed.png" alt="DEE ARR">
+                <span class="logo-text">DEE ARR<span class="text-accent">.</span></span>
             </a>
 
             <nav class="nav-links">
@@ -343,8 +392,11 @@
     <div class="mobile-menu-overlay">
         <div class="mobile-menu-content">
             <div class="mobile-menu-header">
-                <div class="mobile-logo"><img src="assets/logos/company_logo.jpeg" alt="DEE ARR"
-                        style="height:35px; border-radius:4px;"></div>
+                <div class="mobile-logo">
+                    <img src="assets/logos/DEE_ARR_Green_fixed.png" alt="DEE ARR"
+                        style="height:35px; border-radius:4px;">
+                    <span class="logo-text">DEE ARR<span class="text-accent">.</span></span>
+                </div>
                 <button class="close-menu">&times;</button>
             </div>
             <nav class="mobile-nav">
@@ -380,19 +432,22 @@
 
                 <form id="uploadForm" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="title">Project Title *</label>
-                        <input type="text" id="title" name="title" required>
+                        <label for="title">Project Title * <span style="font-size:0.8em; color:#666;">(Max 100
+                                chars)</span></label>
+                        <input type="text" id="title" name="title" required maxlength="100">
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" name="description" rows="4"></textarea>
+                        <label for="description">Description <span style="font-size:0.8em; color:#666;">(Max 500
+                                chars)</span></label>
+                        <textarea id="description" name="description" rows="4" maxlength="500"></textarea>
                     </div>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+91 99999 99999">
+                            <input type="tel" id="phone" name="phone" placeholder="+91 99999 99999"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                         </div>
                         <div class="form-group">
                             <label for="location">Location</label>
@@ -433,6 +488,21 @@
         </div>
     </div>
 
+    <!-- PASSWORD MODAL -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h3>Admin Access</h3>
+            <p style="margin-bottom:10px;">Enter the admin password to unlock upload capabilities.</p>
+            <input type="password" id="adminPasswordInput" placeholder="Enter Password">
+            <div id="passwordError" style="color:#ff4d4d; margin-bottom:15px; display:none; font-size:0.9rem;">
+                Incorrect password</div>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closePasswordModal()">Cancel</button>
+                <button class="btn-confirm" onclick="checkPassword()">Unlock</button>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
@@ -440,7 +510,8 @@
                 <!-- Col 1 -->
                 <div>
                     <a href="index.html" class="footer-logo">
-                        <img src="assets/logos/company_logo.jpeg" alt="DEE ARR">
+                        <img src="assets/logos/DEE_ARR_Green_fixed.png" alt="DEE ARR">
+                        <span class="logo-text">DEE ARR<span class="text-accent">.</span></span>
                     </a>
                     <p style="line-height:1.6; color:#777;">
                         A leader in the construction industry, dedicated to engineering excellence
@@ -484,7 +555,7 @@
                 <div>
                     <h4>Contact</h4>
                     <a href="mailto:deearrconstruction2001@gmail.com">deearrconstruction2001@gmail.com</a>
-                    <a href="tel:+918825696200">+91 88256 96200</a>
+                    <a href="tel:+916369337252">+91 63693 37252</a>
                 </div>
             </div>
 
@@ -528,21 +599,69 @@
             const adminToggle = document.getElementById('adminToggle');
             adminToggle.addEventListener('change', function () {
                 if (this.checked) {
-                    // Ask for password
-                    const password = prompt("Enter Admin Password:");
-                    if (password === ADMIN_PASSWORD) {
-                        isAdminMode = true;
-                        updateAdminUI(true);
-                    } else {
-                        alert("Incorrect password!");
-                        this.checked = false;
-                        isAdminMode = false;
-                    }
+                    // Show custom password modal
+                    openPasswordModal();
                 } else {
                     isAdminMode = false;
                     updateAdminUI(false);
                 }
             });
+        });
+
+        // --- PASSWORD MODAL LOGIC ---
+        const passModal = document.getElementById('passwordModal');
+        const passInput = document.getElementById('adminPasswordInput');
+        const passError = document.getElementById('passwordError');
+
+        function openPasswordModal() {
+            passModal.classList.add('active');
+            passInput.value = '';
+            passError.style.display = 'none';
+            passInput.focus();
+        }
+
+        function closePasswordModal() {
+            passModal.classList.remove('active');
+            // Reset toggle if they cancel
+            if (!isAdminMode) {
+                document.getElementById('adminToggle').checked = false;
+            }
+        }
+
+        function checkPassword() {
+            if (passInput.value === ADMIN_PASSWORD) {
+                isAdminMode = true;
+                updateAdminUI(true);
+                closePasswordModal();
+            } else {
+                passError.style.display = 'block';
+                // Shake effect
+                const content = passModal.querySelector('.modal-content');
+                content.style.animation = 'none';
+                content.offsetHeight; /* trigger reflow */
+                content.style.animation = 'shake 0.5s';
+            }
+        }
+
+        // Add shake keyframes dynamically or relying on existing css if simple
+        // Adding a simple shake here to be safe
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes shake {
+                0% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                50% { transform: translateX(10px); }
+                75% { transform: translateX(-10px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+        // Allow Enter key to submit password
+        passInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
         });
 
         // Update UI based on admin mode
