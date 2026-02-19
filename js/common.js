@@ -55,7 +55,7 @@ function initHeader() {
 function initWhatsApp() {
     // Create button element
     const btn = document.createElement('a');
-    btn.href = 'https://wa.me/919994228985';
+    btn.href = 'https://wa.me/916369337252';
     btn.target = '_blank';
     btn.className = 'whatsapp-sticky';
     btn.setAttribute('aria-label', 'Chat on WhatsApp');
