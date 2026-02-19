@@ -215,7 +215,8 @@ header.scrolled {
   opacity: 0.8;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   opacity: 1;
   color: var(--accent);
 }
@@ -231,7 +232,8 @@ header.scrolled {
   transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
   width: 100%;
 }
 

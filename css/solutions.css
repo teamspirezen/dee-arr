@@ -14,7 +14,7 @@ body {
   align-items: center;
   overflow: hidden;
   background-color: var(--bg-dark);
-  background-image: url('../assets/images/construction brick 1.jpeg');
+  background-image: url('../assets/images/solutions_page_bg.jpeg');
   background-size: cover;
   background-position: center;
 }
