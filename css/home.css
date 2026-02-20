@@ -55,6 +55,18 @@ img {
   display: block;
 }
 
+/* Override for logo images - prevent them from expanding to full width */
+.logo img,
+.mobile-logo img,
+.footer-logo img {
+  height: 45px !important;
+  max-height: 45px !important;
+  width: auto !important;
+  max-width: 120px !important;
+  object-fit: contain;
+  display: inline-block;
+}
+
 button {
   font-family: inherit;
   cursor: pointer;
@@ -471,6 +483,82 @@ header.scrolled {
   transform: scale(1.05);
 }
 
+
+/* ===========================
+   SECTION STYLING
+=========================== */
+.product-partners {
+  background: #0b0b0b;
+  padding: 80px 5%;
+}
+
+/* GRID */
+.partners-grid {
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* FORCE 4 PER ROW */
+.partner-wrapper {
+  flex: 0 0 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+/* LOGO BOX */
+.partner-item {
+  width: 180px;
+  height: 110px;
+  background: #111;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .4s ease;
+}
+
+.partner-item img {
+  max-width: 120px;
+  max-height: 60px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: .4s ease;
+}
+
+/* NAME BELOW BOX */
+.partner-name {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #cfcfcf;
+  text-align: center;
+}
+
+/* HOVER */
+.partner-wrapper:hover .partner-item {
+  transform: translateY(-6px);
+  background: #1a1a1a;
+}
+
+.partner-wrapper:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.partner-wrapper:hover .partner-name {
+  color: #fff;
+}
+
+/* MOBILE */
+@media(max-width:768px) {
+  .partner-wrapper {
+    flex: 0 0 50%;
+  }
+}
 
 
 
@@ -957,6 +1045,13 @@ header.scrolled {
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding: 16px 0;
+  }
+
+  /* FORCE LOGO SIZE ON MOBILE */
+  header .logo img {
+    height: 35px !important;
+    width: auto !important;
+    max-width: 120px;
   }
 
   /* Reduce Section Padding Globally for Mobile */
