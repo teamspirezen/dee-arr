@@ -262,7 +262,7 @@
   padding: 18px 40px;
   background: var(--accent);
   color: #000;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   border-radius: 50px;
@@ -276,6 +276,27 @@
   transform: translateY(-2px);
 }
 
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  padding: 12px 28px;
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: #fff;
+  color: #000;
+}
 /* --- ANIMATIONS --- */
 .fade-in-up {
   opacity: 0;
