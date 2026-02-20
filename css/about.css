@@ -184,9 +184,11 @@
 }
 
 .leaders-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+   display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Exactly 2 columns */
+  gap: 20px; /* smaller gap */
+  max-width: 1000px; /* reduce overall width */
+  margin: 0 auto;
 }
 
 .leader-card {
