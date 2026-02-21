@@ -151,15 +151,11 @@ body {
   padding: 40px;
   border-radius: 12px;
   transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+   
   /* Slower, smoother */
 }
 
-.service-card:hover {
-  transform: translateX(10px) translateY(-5px);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--accent);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
+
 
 .card-icon {
   font-size: 2.5rem;
@@ -175,6 +171,21 @@ body {
 .service-card p {
   color: var(--text-muted);
 }
+
+.btn-text{
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 25px;
+
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+
+  transition: color 0.3s ease; /* only color change */
+}
+
+
+
 
 /* VISUAL BREAK (PARALLAX) */
 .visual-break {
