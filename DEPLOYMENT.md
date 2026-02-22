@@ -8,12 +8,14 @@ I have already restructured your project so that the server and frontend files a
 -   `server.js` has been updated to serve the website correctly.
 
 ## 2. Create the Archive
-1.  On your computer, go to the project folder: `D:\Work Sprietzen\Dee Arr`
-2.  Select **ALL** files and folders **EXCEPT**:
-    -   `node_modules` (Do NOT upload this folder)
+1.  On your computer, go to the project folder: `D:\Work Sprietzen\Dee Arr - Copy`
+2.  **CRITICAL — Delete these before zipping (or exclude them):**
+    -   `node_modules` — **MUST be deleted!** These are compiled for Windows and will crash on Linux.
+    -   `package-lock.json` — Delete this too to avoid version conflicts on the server.
     -   `.git` (Do not upload)
-    -   `admin_panel` (Check if anything important is left, otherwise ignore)
-3.  Right-click and select **Compress to ZIP file**. Name it something like `website_deploy.zip`.
+    -   `dee final.zip`, `dee final 1.zip`, `dee123456.zip` etc. (large test zips — skip all of these)
+3.  Select ALL remaining files and folders, right-click → **Compress to ZIP file**. Name it `website_deploy.zip`.
+
 
 ## 3. Upload to Hostinger
 1.  Log in to your Hostinger hPanel.
