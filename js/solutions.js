@@ -26,3 +26,53 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 });
+
+/* ===== CURSOR MINI IMAGE PREVIEW ===== */
+const cursorPreview = document.querySelector('.cursor-preview');
+const previewImg = document.getElementById('preview-img');
+const serviceCards = document.querySelectorAll('.service-card[data-img]');
+
+/* Follow the cursor — image appears to the right of cursor */
+document.addEventListener('mousemove', (e) => {
+    cursorPreview.style.left = '0';
+    cursorPreview.style.top = '0';
+    cursorPreview.style.transform = `translate(calc(27px + ${e.clientX}px), calc(-50% - 30px + ${e.clientY}px))`;
+});
+
+/* Show / hide preview on card hover */
+serviceCards.forEach(card => {
+
+    /* ── DESKTOP: mouse events ── */
+    card.addEventListener('mouseenter', () => {
+        previewImg.src = card.dataset.img;
+        cursorPreview.style.opacity = '1';
+    });
+    card.addEventListener('mouseleave', () => {
+        cursorPreview.style.opacity = '0';
+    });
+
+    /* ── MOBILE: image centered on tap, follows finger on drag ── */
+    card.addEventListener('touchstart', () => {
+        const img = card.querySelector('.card-img');
+        if (!img) return;
+        /* place at center of card on initial tap */
+        img.style.left = '50%';
+        img.style.top = '50%';
+        img.classList.add('show');
+    }, { passive: true });
+
+    card.addEventListener('touchmove', (e) => {
+        const img = card.querySelector('.card-img');
+        if (!img) return;
+        const rect = card.getBoundingClientRect();
+        const touch = e.touches[0];
+        img.style.left = (touch.clientX - rect.left) + 'px';
+        img.style.top = (touch.clientY - rect.top) + 'px';
+    }, { passive: true });
+
+    card.addEventListener('touchend', () => {
+        const img = card.querySelector('.card-img');
+        if (img) img.classList.remove('show');
+    });
+
+});

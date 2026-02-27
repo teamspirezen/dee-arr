@@ -147,15 +147,21 @@ body {
 .service-card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.15);
   padding: 40px;
   border-radius: 12px;
-  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-   
-  /* Slower, smoother */
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  /* needed for absolute card-img */
+  overflow: hidden;
+  /* clips image within card */
 }
 
-
+.service-card:hover {
+  border-color: var(--accent);
+  /* only the border color changes */
+}
 
 .card-icon {
   font-size: 2.5rem;
@@ -172,7 +178,30 @@ body {
   color: var(--text-muted);
 }
 
-.btn-text{
+/* Card image — absolutely positioned inside card, follows finger on mobile */
+.card-img {
+  display: none;
+  position: absolute;
+  width: 160px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  /* center on touch point */
+  transition: opacity 0.2s ease;
+  opacity: 0;
+  z-index: 10;
+}
+
+/* JS adds this class on touchstart, removes on touchend */
+.card-img.show {
+  display: block;
+  opacity: 1;
+}
+
+.btn-text {
   font-weight: 600;
   display: inline-block;
   margin-top: 25px;
@@ -181,11 +210,28 @@ body {
   color: #fff;
   font-size: 15px;
 
-  transition: color 0.3s ease; /* only color change */
+  transition: color 0.3s ease;
+  /* only color change */
 }
 
+/* ================= CURSOR MINI IMAGE PREVIEW ================= */
+.cursor-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
 
-
+.cursor-preview img {
+  width: 260px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
 
 /* VISUAL BREAK (PARALLAX) */
 .visual-break {
@@ -382,6 +428,21 @@ body {
 
   .stack-wrapper {
     padding: 60px 0 100px;
-    /* Reduce padding on mobile */
+  }
+
+  /* ── Service Cards ── */
+  .service-card {
+    padding: 40px;
+    border-radius: 10px;
+  }
+
+  /* Show image inside card on tap — JS toggles .show class */
+  .service-card:active {
+    border-color: var(--accent);
+  }
+
+  /* Hide the floating cursor preview on mobile */
+  .cursor-preview {
+    display: none !important;
   }
 }
